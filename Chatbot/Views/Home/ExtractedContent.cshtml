@@ -1,0 +1,155 @@
+﻿@model string
+@{
+    ViewData["Title"] = "Scraped Content Preview";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 0;
+            color: var(--dark-color);
+        }
+
+        .content-container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            font-size: 1.8rem;
+            border-bottom: 2px solid #dfe6e9;
+            padding-bottom: 0.5rem;
+        }
+
+        .content-preview {
+            background: #f8f9fa;
+            border: 1px solid #dfe6e9;
+            border-radius: 8px;
+            padding: 1.5rem;
+            max-height: 500px;
+            overflow-y: auto;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            font-family: 'Consolas', monospace;
+            margin-bottom: 1.5rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+        }
+
+        .home-button {
+            padding: 0.8rem 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+            .home-button:hover {
+                background-color: #1a252f;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+        .copy-button {
+            padding: 0.8rem 1.5rem;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+            .copy-button:hover {
+                background-color: #2980b9;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(41, 128, 185, 0.2);
+            }
+
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="content-container">
+        <h1>Scraped Content Preview</h1>
+
+        <div class="content-preview">
+            @Model
+        </div>
+
+        <div class="action-buttons">
+            <button class="copy-button" onclick="copyToClipboard()">
+                Copy Content
+            </button>
+
+            <a asp-action="Index" asp-controller="Home" class="home-button">
+                ← Return to Home
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        © @DateTime.Now.Year Ministry of Environment and Climate Change. All rights reserved.
+    </footer>
+
+    <script>
+        function copyToClipboard() {
+            const content = document.querySelector('.content-preview').textContent;
+            navigator.clipboard.writeText(content)
+                .then(() => {
+                    const btn = document.querySelector('.copy-button');
+                    btn.textContent = 'Copied!';
+                    setTimeout(() => {
+                        btn.textContent = 'Copy Content';
+                    }, 2000);
+                })
+                .catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
+        }
+    </script>
+</body>
+</html>

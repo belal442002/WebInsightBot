@@ -1,0 +1,206 @@
+﻿@{
+    ViewData["Title"] = "Scrape Website Content";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --error-color: #e74c3c;
+            --success-color: #2ecc71;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--dark-color);
+        }
+
+        .scrape-container {
+            width: 90%;
+            max-width: 600px;
+            padding: 2.5rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            font-size: 1rem;
+            border: 2px solid #dfe6e9;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+            .input-field:focus {
+                outline: none;
+                border-color: var(--secondary-color);
+                box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+            }
+
+        .url-status {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            min-height: 1.2rem;
+        }
+
+        .status-valid {
+            color: var(--success-color);
+        }
+
+        .status-invalid {
+            color: var(--error-color);
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 1rem;
+        }
+
+            .submit-button:hover {
+                background-color: #2980b9;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(41, 128, 185, 0.3);
+            }
+
+            .submit-button:disabled {
+                background-color: #95a5a6;
+                cursor: not-allowed;
+                transform: none;
+                box-shadow: none;
+            }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+            .back-link:hover {
+                color: #2980b9;
+                text-decoration: underline;
+            }
+    </style>
+</head>
+<body>
+    <div class="scrape-container">
+        <h1>Enter Website URL to Scrape</h1>
+
+        <form asp-action="ExtractContent" method="post">
+            <div class="form-group">
+                <label for="websiteUrl">Website URL</label>
+                <input type="url" id="websiteUrl" name="websiteUrl" class="input-field"
+                       placeholder="https://www.example.com" required>
+                <div id="urlStatus" class="url-status"></div>
+            </div>
+
+            <button type="submit" id="submitBtn" class="submit-button" disabled>
+                Extract Content
+            </button>
+        </form>
+
+        <a asp-action="Index" asp-controller="Home" class="back-link">
+            ← Return to Home
+        </a>
+    </div>
+
+    <script>
+        const urlInput = document.getElementById('websiteUrl');
+        const urlStatus = document.getElementById('urlStatus');
+        const submitBtn = document.getElementById('submitBtn');
+
+        urlInput.addEventListener('input', async function() {
+            const url = this.value.trim();
+
+            if (url === '') {
+                urlStatus.textContent = '';
+                urlStatus.className = 'url-status';
+                submitBtn.disabled = true;
+                return;
+            }
+
+            try {
+                // Basic URL validation
+                if (!isValidUrl(url)) {
+                    urlStatus.textContent = 'Please enter a valid URL (e.g., https://example.com)';
+                    urlStatus.className = 'url-status status-invalid';
+                    submitBtn.disabled = true;
+                    return;
+                }
+
+                // Check if URL exists (HEAD request)
+                const response = await fetch(url, { method: 'HEAD', mode: 'no-cors' });
+
+                urlStatus.textContent = 'URL is valid and accessible';
+                urlStatus.className = 'url-status status-valid';
+                submitBtn.disabled = false;
+            } catch (error) {
+                urlStatus.textContent = 'URL could not be reached. Please check and try again.';
+                urlStatus.className = 'url-status status-invalid';
+                submitBtn.disabled = true;
+            }
+        });
+
+        function isValidUrl(string) {
+            try {
+                new URL(string);
+                return true;
+            } catch (_) {
+                return false;
+            }
+        }
+    </script>
+</body>
+</html>

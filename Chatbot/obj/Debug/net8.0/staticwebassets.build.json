@@ -1,0 +1,39 @@
+{
+  "Version": 1,
+  "Hash": "uTdY9xAeqLlsX8HR9d7g5v0xnn98PPMV6bCtpO6K7Yk=",
+  "Source": "Chatbot",
+  "BasePath": "_content/Chatbot",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "Chatbot\\wwwroot",
+      "Source": "Chatbot",
+      "ContentRoot": "E:\\AI-Internship-Tasks\\Chatbot_Task3\\Chatbot\\wwwroot\\",
+      "BasePath": "_content/Chatbot",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "E:\\AI-Internship-Tasks\\Chatbot_Task3\\Chatbot\\wwwroot\\scraped_content\\scraped_2cd0b727-5a70-45e7-a30d-68b6761d83b7.txt",
+      "SourceId": "Chatbot",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\AI-Internship-Tasks\\Chatbot_Task3\\Chatbot\\wwwroot\\",
+      "BasePath": "_content/Chatbot",
+      "RelativePath": "scraped_content/scraped_2cd0b727-5a70-45e7-a30d-68b6761d83b7.txt",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\scraped_content\\scraped_2cd0b727-5a70-45e7-a30d-68b6761d83b7.txt"
+    }
+  ]
+}

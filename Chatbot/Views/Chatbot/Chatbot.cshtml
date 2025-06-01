@@ -1,0 +1,202 @@
+﻿@model List<Message>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>ChatBot</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        /* Home Button */
+        .home-button {
+            margin-bottom: 20px;
+            display: inline-block;
+            text-decoration: none;
+            background-color: #6c757d;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+            .home-button:hover {
+                background-color: #5a6268;
+            }
+        /* Chat Container */
+        .chat-container {
+            max-height: 500px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            background-color: #fafafa;
+        }
+
+        .message {
+            display: flex;
+            margin-bottom: 10px;
+            clear: both;
+        }
+            /* Align user messages to the right */
+            .message.user {
+                justify-content: flex-end;
+            }
+            /* Align bot messages to the left */
+            .message.bot {
+                justify-content: flex-start;
+            }
+
+        .message-content {
+            max-width: 70%;
+            padding: 10px 15px;
+            border-radius: 15px;
+            word-wrap: break-word;
+        }
+        /* User message style */
+        .message.user .message-content {
+            background-color: #007bff;
+            color: white;
+            border-bottom-right-radius: 0;
+        }
+        /* Bot message style */
+        .message.bot .message-content {
+            background-color: #e9e9eb;
+            color: #333;
+            border-bottom-left-radius: 0;
+        }
+        /* Input area styling */
+        .input-container {
+            display: flex;
+        }
+
+            .input-container input[type="text"] {
+                flex-grow: 1;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px 0 0 5px;
+                outline: none;
+                font-size: 16px;
+            }
+
+            .input-container button {
+                padding: 10px 20px;
+                border: none;
+                background-color: #28a745;
+                color: #fff;
+                font-size: 16px;
+                cursor: pointer;
+                border-radius: 0 5px 5px 0;
+            }
+
+                .input-container button:hover {
+                    background-color: #218838;
+                }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Home Button -->
+        <a class="home-button" href="@Url.Action("Index", "Home")">Home</a>
+
+        <!-- Chat History -->
+        <div class="chat-container" id="chatContainer">
+            @* @foreach (var message in Model)
+            {
+                var messageClass = message.Role.ToLower() == "user" ? "user" : "bot";
+                <div class="message @messageClass">
+                    <div class="message-content">
+                        @message.Content
+                    </div>
+                </div>
+            } *@
+        </div>
+
+        <!-- Chat Input -->
+        <form id="chatForm">
+            <div class="input-container">
+                <input type="text" id="userMessage" name="userMessage" placeholder="Type your message..." required />
+                <button type="submit">Send</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Initialize the chatMessages array with the initial messages rendered by the view.
+        var chatMessages = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model));
+
+        // Handle the form submission without reloading the page
+        document.getElementById("chatForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            var inputField = document.getElementById("userMessage");
+            var userMsg = inputField.value.trim();
+            if (!userMsg) return;
+
+            // Append the user's message to the chat container
+            var chatContainer = document.getElementById("chatContainer");
+            var userDiv = document.createElement("div");
+            userDiv.className = "message user";
+            var contentDiv = document.createElement("div");
+            contentDiv.className = "message-content";
+            contentDiv.textContent = userMsg;
+            userDiv.appendChild(contentDiv);
+            chatContainer.appendChild(userDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight; // auto-scroll to bottom
+
+            // Add the new user message to the chatMessages array
+            chatMessages.push({ Content: userMsg, Role: "user" });
+
+            // Clear the input field
+            inputField.value = "";
+
+            // Send asynchronous request to the server with the current chat history and the new user message
+            fetch('@Url.Action("SendMessage", "Chatbot")', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ Messages: chatMessages, UserMessage: userMsg })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Assume the server returns an object with a "botMessage" property
+                    var botMsg = data.botMessage;
+                    if (botMsg) {
+                        // Append the bot's message to the chat container
+                        var botDiv = document.createElement("div");
+                        botDiv.className = "message bot";
+                        var botContentDiv = document.createElement("div");
+                        botContentDiv.className = "message-content";
+                        botContentDiv.textContent = botMsg;
+                        botDiv.appendChild(botContentDiv);
+                        chatContainer.appendChild(botDiv);
+                        chatContainer.scrollTop = chatContainer.scrollHeight;
+
+                        // Add the bot's message to the chatMessages array
+                        chatMessages.push({ Content: botMsg, Role: "bot" });
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>

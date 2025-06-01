@@ -1,0 +1,229 @@
+﻿@model ScrapedContentViewModel
+@{
+    ViewData["Title"] = "Bilingual Content Preview";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 0;
+            color: var(--dark-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            font-weight: 600;
+            text-align: center;
+            font-size: 2rem;
+            border-bottom: 2px solid #dfe6e9;
+            padding-bottom: 1rem;
+        }
+
+        .language-section {
+            margin-bottom: 3rem;
+            border: 1px solid #dfe6e9;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .language-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .language-flag {
+            width: 24px;
+            height: 24px;
+            margin-right: 0.5rem;
+        }
+
+        .content-preview {
+            padding: 1.5rem;
+            max-height: 400px;
+            overflow-y: auto;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            font-family: 'Consolas', monospace;
+            background-color: #f8f9fa;
+        }
+
+        .arabic-content {
+            direction: rtl;
+            text-align: right;
+            font-family: 'Segoe UI', 'Tahoma', sans-serif;
+            font-size: 1.1rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 1.5rem;
+            background-color: #f8f9fa;
+            border-top: 1px solid #dfe6e9;
+        }
+
+        .chat-button {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .english-chat {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .arabic-chat {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .chat-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .home-button {
+            padding: 0.8rem 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+            .home-button:hover {
+                background-color: #1a252f;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+        .icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.5rem;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+    </style>
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bilingual Content Preview</h1>
+
+        <!-- English Content Section with its own form -->
+        <div class="language-section">
+            <div class="language-header">
+                <div>
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgNDgwIj48ZyBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHN0cm9rZS13aWR0aD0iMXB0Ij48cGF0aCBkPSJNMCAwaDY0MHY0ODBIMHoiIGZpbGw9IiMwMTIxNjkiLz48cGF0aCBkPSJNMTgxLjMgMGgyNzcuNXY0ODBIMTgxLjN6IiBmaWxsPSIjZmZmIi8+PHBhdGggZD0iTTI3Ny4zIDBoODUuM3Y0ODBoLTg1LjN6IiBmaWxsPSIjYzQxMDI3Ii8+PC9nPjwvc3ZnPg=="
+                         class="language-flag" alt="UK Flag">
+                    English Content
+                </div>
+            </div>
+            <div class="content-preview">
+                @Model.EnglishContent
+            </div>
+            <form asp-action="BuildChatbot" asp-controller="Chatbot" method="post">
+                <input type="hidden" name="content" value="@Model.EnglishContent">
+                <input type="hidden" name="language" value="en">
+                <div class="action-buttons">
+                    <button type="submit" class="chat-button english-chat">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z" />
+                        </svg>
+                        Chat in English
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Arabic Content Section with its own form -->
+        <div class="language-section">
+            <div class="language-header">
+                <div>
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgNDgwIj48cGF0aCBmaWxsPSIjY2UxMTI0IiBkPSJNMCAwaDY0MHY0ODBIMHoiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTkyIDBoMjU2djQ4MEgxOTJ6Ii8+PHBhdGggZD0iTTI1NiAxMjhsMjIgNzJoLTQ0bTIwIDk2bDIyLTcyaC00NG0tNjQgMGwyMi03MmgtNDRtMjAgOTZsMjItNzJoLTQ0TTM4NCAyNTZsMjItNzJoLTQ0bTIwLTk2bDIyIDcyaC00NG0tNjQgMGwyMiA3MmgtNDRtMjAtOTZsMjIgNzJoLTQ0TTEyOCAyNTZsMjItNzJoLTQ0IiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMTYiLz48L3N2Zz4="
+                         class="language-flag" alt="Saudi Flag">
+                    المحتوى العربي
+                </div>
+            </div>
+            <div class="content-preview arabic-content">
+                @Model.ArabicContent
+            </div>
+            <form asp-action="BuildChatbot" asp-controller="Chatbot" method="post">
+                <input type="hidden" name="content" value="@Model.ArabicContent">
+                <input type="hidden" name="language" value="ar">
+                <div class="action-buttons">
+                    <button type="submit" class="chat-button arabic-chat">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z" />
+                        </svg>
+                        محادثة بالعربية
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem;">
+            <a asp-action="Index" asp-controller="Home" class="home-button">
+                ← Return to Home
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        © @DateTime.Now.Year Ministry of Environment and Climate Change. All rights reserved.
+    </footer>
+</body>
+</html>

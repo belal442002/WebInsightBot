@@ -1,0 +1,43 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = Chatbot
+build_property.RootNamespace = Chatbot
+build_property.ProjectDir = E:\AI-Internship-Tasks\Chatbot_Task3\Chatbot\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = E:\AI-Internship-Tasks\Chatbot_Task3\Chatbot
+build_property._RazorSourceGeneratorDebug = 
+
+[E:/AI-Internship-Tasks/Chatbot_Task3/Chatbot/Views/Chatbot/Chatbot.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdGJvdFxDaGF0Ym90LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/AI-Internship-Tasks/Chatbot_Task3/Chatbot/Views/Chatbot/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdGJvdFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/AI-Internship-Tasks/Chatbot_Task3/Chatbot/Views/Home/ExtractedContent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxFeHRyYWN0ZWRDb250ZW50LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/AI-Internship-Tasks/Chatbot_Task3/Chatbot/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/AI-Internship-Tasks/Chatbot_Task3/Chatbot/Views/Home/ScrapeContent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTY3JhcGVDb250ZW50LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/AI-Internship-Tasks/Chatbot_Task3/Chatbot/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 

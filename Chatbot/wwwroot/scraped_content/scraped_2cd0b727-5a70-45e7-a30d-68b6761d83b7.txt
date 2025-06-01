@@ -1,0 +1,61 @@
+```json
+{
+  "news": [
+    {
+      "title": "Ministry of Environment monitors two cases of sea cow (dugong) deaths on the shores",
+      "date": "27 Mar 2025",
+      "summary": "The Ministry of Environment and Climate Change has announced the monitoring of two cases of sea cow (dugong) fatalities on the shores of the country. Initial assessments indicate that the animals may have been caught in fishing nets."
+    },
+    {
+      "title": "Qatar participates in Petersberg Climate Dialogue to support global climate",
+      "date": "26 Mar 2025",
+      "summary": "The State of Qatar took part in the ongoing Petersberg Climate Dialogue in Berlin with a high-level delegation from the Ministry of Environment and Climate Change."
+    },
+    {
+      "title": "MECC and Qetaifan Projects launch mangrove plantation project",
+      "date": "25 Mar 2025",
+      "summary": "The Ministry of Environment and Climate Change, in collaboration with Qetaifan Projects, has announced the launch of an innovative environmental project."
+    }
+  ],
+  "statistics": [
+    {
+      "metric": "Total area of protected areas in Qatar Land",
+      "value": "25.53% 2,982.58"
+    },
+    {
+      "metric": "Total area of protected areas in Qatar Maritime",
+      "value": "2.27% 721.18"
+    },
+    {
+      "metric": "Air Quality Origin",
+      "value": "9"
+    },
+    {
+      "metric": "Air Quality Area",
+      "value": "97% 2970"
+    },
+    {
+      "metric": "The number of wildlife in natural reserves",
+      "value": "2821"
+    }
+  ],
+  "initiatives": [
+    {
+      "name": "Sea Turtle Protection Project",
+      "description": "The State of Qatar places significant emphasis on its plan to safeguard endangered species."
+    },
+    {
+      "name": "Initiative to Plant 10 Million Trees by 2030",
+      "description": "The State of Qatar launched the One Million Tree Planting Initiative to further its efforts in the field."
+    },
+    {
+      "name": "Environmental Monitoring and Inspection Department",
+      "description": "This initiative is based on the development of a national plan to monitor air quality by measuring time."
+    },
+    {
+      "name": "5G Environmental Impact Study in Qatar",
+      "description": "The objective of this initiative is to study the health effects of 5G technology on the public, education, and more."
+    }
+  ]
+}
+```
