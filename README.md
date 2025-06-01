@@ -58,7 +58,7 @@ Replace placeholders with your actual Azure OpenAI credentials:
 Run the following commands to get started:
 
 ### 📥 1. Clone the Repository
-git clone https://github.com/your-username/your-repo-name.git
+git clone https://github.com/belal442002/WebInsightBot.git
 
 ### 2. Decopress bin.rar file
 
